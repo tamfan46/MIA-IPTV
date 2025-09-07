@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>CH7 HD - MIA IPTV</title>
+<title>CHXX HD - MIA IPTV</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,shrink-to-fit=no">
 <link rel="stylesheet" type="text/css" href="/clap.css">
 <script src="//cdn.jsdelivr.net/npm/@clappr/player@0.4.0/dist/clappr.min.js"></script>
@@ -12,31 +12,19 @@
 <script src="//cdn.jsdelivr.net/npm/shaka-player@2.5.10/dist/shaka-player.compiled.min.js"></script>
 <script src="//cdn.jsdelivr.net/gh/clappr/dash-shaka-playback@latest/dist/dash-shaka-playback.external.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/cdnbye-shaka@latest"></script>
-<style> 
-body {
-    background-color: #000000;
-    margin: 0;
-}
-#player {
-    width: 100%;
-    height: 100vh;
-}
-#channel-logo {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    height: 40px;
-}
+<style>
+body { background-color: #000000; margin: 0; }
+#player { width: 100%; height: 100vh; }
+#channel-logo { position: absolute; top: 10px; left: 10px; height: 40px; }
 </style>
 </head>
 <body>
-<img id="channel-logo" src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0018.png" alt="CH7 Logo">
-
+<img id="channel-logo" src="URL_LOGO_CH" alt="CHXX Logo">
 <div id="player"></div>
 
 <script>
 var player = new Clappr.Player({
-    source: 'https://49-231-34-101-rewriter.ais-vidnt.com/ais/play/anevia/live/eds/B0018/DASH/B0018.mpd?playbackUrlPrefix=https%3A%2F%2Ftr.play-rbcdn.ais.co.th%3A8438%2F&originBasicUrl=http%3A%2F%2Fpl-origin.ais-vidnt.com%2Fais%2Fplay%2Fanevia&tt=5bfa99a4db2140e344d3f937746c61db&chunkHttps=true&tmid=B0015&tpbk=DipWb8LZkjQzcj5M&rrt=1756513675&tmod=rfk&rsid=78741ff2-b174-4475-8a50-1c8fde18ef4f&tuid=596095e825&cdn=redfox-https&tdid=528e59069574709f71346c8c5aac376b&origin=anevia&tfa=f0-fc&tttl=1756600075',
+    source: 'URL_MPD_CH',
     mimeType: 'application/dash+xml',
     height: '100%',
     width: '100%',
@@ -48,15 +36,10 @@ var player = new Clappr.Player({
             plugin && plugin.disable();
         }
     },
-    chromecast: {
-        preload: 'metadata',
-        contentType: 'video/mpd',
-    },
+    chromecast: { preload: 'metadata', contentType: 'video/mpd' },
     shakaConfiguration: {
         drm: {
-            clearKeys: {
-                // ใส่ ClearKey ของ CH7 หากมี
-            }
+            clearKeys: { 'KEY_ID':'KEY_VALUE' } // ใส่ ClearKey ของช่อง
         }
     },
     shakaOnBeforeLoad: function (shaka_player) {},
@@ -64,9 +47,7 @@ var player = new Clappr.Player({
 });
 </script>
 
-<span style='position:absolute;bottom:10px;right:20px;font-size:15px;font-weight:bold;color:#00ff8c;'><em>MIA IPTV</em></span>
-<center>
-<p><ins>MIA IPTV</ins></p>
-</center>
+<span style='position:absolute;bottom:10px;right:20px;font-size:15px;font-weight:bold;color:#00ff8c;'><em>CHXX HD</em></span>
+<center><p><ins>MIA IPTV</ins></p></center>
 </body>
 </html>
