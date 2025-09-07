@@ -24,8 +24,8 @@ body { background-color: #000000; margin: 0; }
 
 <script>
 var player = new Clappr.Player({
-    source: 'URL_MPD_CH',
-    mimeType: 'application/dash+xml',
+    source: 'URL_MPD_OR_M3U8',
+    mimeType: 'application/dash+xml', // HLS: 'application/x-mpegURL'
     height: '100%',
     width: '100%',
     autoPlay: true,
@@ -39,7 +39,7 @@ var player = new Clappr.Player({
     chromecast: { preload: 'metadata', contentType: 'video/mpd' },
     shakaConfiguration: {
         drm: {
-            clearKeys: { 'KEY_ID':'KEY_VALUE' } // ใส่ ClearKey ของช่อง
+            clearKeys: { 'KEY_ID':'KEY_VALUE' } // ใส่ ClearKey ของช่อง (ถ้ามี)
         }
     },
     shakaOnBeforeLoad: function (shaka_player) {},
@@ -47,7 +47,7 @@ var player = new Clappr.Player({
 });
 </script>
 
-<span style='position:absolute;bottom:10px;right:20px;font-size:15px;font-weight:bold;color:#00ff8c;'><em>CHXX HD</em></span>
+<span style='position:absolute;bottom:10px;right:20px;font-size:15px;font-weight:bold;color:#00ff8c;'><em>MIA IPTV</em></span>
 <center><p><ins>MIA IPTV</ins></p></center>
 </body>
 </html>
