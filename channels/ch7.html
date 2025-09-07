@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>CHXX HD - MIA IPTV</title>
+<title>CH7 HD - MIA IPTV</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,shrink-to-fit=no">
 <link rel="stylesheet" type="text/css" href="/clap.css">
 <script src="//cdn.jsdelivr.net/npm/@clappr/player@0.4.0/dist/clappr.min.js"></script>
@@ -12,20 +12,21 @@
 <script src="//cdn.jsdelivr.net/npm/shaka-player@2.5.10/dist/shaka-player.compiled.min.js"></script>
 <script src="//cdn.jsdelivr.net/gh/clappr/dash-shaka-playback@latest/dist/dash-shaka-playback.external.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/cdnbye-shaka@latest"></script>
-<style>
+<style> 
 body { background-color: #000000; margin: 0; }
 #player { width: 100%; height: 100vh; }
 #channel-logo { position: absolute; top: 10px; left: 10px; height: 40px; }
 </style>
 </head>
 <body>
-<img id="channel-logo" src="URL_LOGO_CH" alt="CHXX Logo">
+<img id="channel-logo" src="https://gigatv.3bbtv.co.th/wp-content/themes/changwattana/assets/channel/35.png" alt="CH7 HD Logo">
+
 <div id="player"></div>
 
 <script>
 var player = new Clappr.Player({
-    source: 'URL_MPD_OR_M3U8',
-    mimeType: 'application/dash+xml', // HLS: 'application/x-mpegURL'
+    source: 'https://live-cdn.ch7.com/out/v1/eafeb02c55b64a15b278b1e66c7fc776/playlist.m3u8',
+    mimeType: 'application/x-mpegURL',
     height: '100%',
     width: '100%',
     autoPlay: true,
@@ -36,12 +37,8 @@ var player = new Clappr.Player({
             plugin && plugin.disable();
         }
     },
-    chromecast: { preload: 'metadata', contentType: 'video/mpd' },
-    shakaConfiguration: {
-        drm: {
-            clearKeys: { 'KEY_ID':'KEY_VALUE' } // ใส่ ClearKey ของช่อง (ถ้ามี)
-        }
-    },
+    chromecast: { preload: 'metadata', contentType: 'application/x-mpegURL' },
+    shakaConfiguration: { drm: {} },
     shakaOnBeforeLoad: function (shaka_player) {},
     parentId: '#player'
 });
