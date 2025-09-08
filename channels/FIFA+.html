@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>FIFA+ - MIA IPTV</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,shrink-to-fit=no">
+<link rel="stylesheet" type="text/css" href="/clap.css">
+<script src="//cdn.jsdelivr.net/npm/@clappr/player@0.4.0/dist/clappr.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/mux.js@5.6.7/dist/mux.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/level-selector@latest/dist/level-selector.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/clappr-chromecast-plugin@latest/dist/clappr-chromecast-plugin.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/clappr-pip@latest/dist/clappr-pip.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/clappr-playback-rate-plugin@latest/dist/clappr-playback-rate-plugin.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/shaka-player@2.5.10/dist/shaka-player.compiled.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/clappr/dash-shaka-playback@latest/dist/dash-shaka-playback.external.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/cdnbye-shaka@latest"></script>
+<style> 
+body { background-color: #000000; margin: 0; }
+#player { width: 100%; height: 100vh; }
+#channel-logo { position: absolute; top: 10px; left: 10px; height: 40px; }
+</style>
+</head>
+<body>
+<img id="channel-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2vjrECkb02Mh6mLByAx6iQ48Lq77rcM6eGQ&s" alt="FIFA+ Logo">
+
+<div id="player"></div>
+
+<script>
+var player = new Clappr.Player({
+    source: 'https://d3b0v7fggu5zwm.cloudfront.net/out/v1/d2c68a3dfb644808b416bd90dcc92d5f/index.mpd',
+    mimeType: 'application/dash+xml',
+    height: '100%',
+    width: '100%',
+    autoPlay: true,
+    plugins: [LevelSelector, DashShakaPlayback, Clappr.MediaControl],
+    events: {
+        onReady: function() {
+            var plugin = this.getPlugin('click_to_pause');
+            plugin && plugin.disable();
+        }
+    },
+    playback: {
+        playInline: true,
+        recycleVideo: true
+    },
+    chromecast: { preload: 'metadata', contentType: 'video/mpd' },
+    shakaConfiguration: {
+        drm: {
+            clearKeys: { '911e72adf36946afbdbb4f80782a8394':'08aec548a851ba64b7172ae7f05cb91c' }
+        },
+        streaming: {
+            retryParameters: { maxAttempts: 5 }
+        }
+    },
+    shakaOnBeforeLoad: function (shaka_player) {
+        // set custom headers
+        shaka_player.getNetworkingEngine().registerRequestFilter(function(type, request) {
+            if (type == shaka.net.NetworkingEngine.RequestType.SEGMENT ||
+                type == shaka.net.NetworkingEngine.RequestType.MANIFEST) {
+                request.headers['Referer'] = 'https://visionplus.id/';
+                request.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36';
+            }
+        });
+    },
+    parentId: '#player'
+});
+</script>
+
+<span style='position:absolute;bottom:10px;right:20px;font-size:15px;font-weight:bold;color:#00ff8c;'><em>MIA IPTV</em></span>
+<center><p><ins>MIA IPTV</ins></p></center>
+</body>
+</html>
